@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .main {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .input_container {
+            position: relative;
+        }
+
+        .input_box {
+            padding-right: 22px;
+            font-size: 15px;
+        }
+
+        .input_error {
+            display: none;
+            position: absolute;
+            right: 0;
+            z-index: 1;
+            margin-top: 11px;
+            margin-right: 5px;
+        }
+
+        .result_containe {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            height: 360px;
+            width: 40%;
+            min-width: 270px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        form {
+            width: 400px;
+            border: 2px solid black;
+            padding: 50px 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            width: 100%;
+            background-color: rgb(102, 74, 228);
+        }
+        .close-btn{
+            width: 80px;
+        }
+        .show{
+            display: block;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <form id="taxForm" class="result_form">
+            <div class="form-group">
+                <div>
+                    <label for="exampleInputEmail1">Enter Gross Annual Income</label>
+                    <svg data-toggle="tooltip" data-placement="top"
+                        title="Gross annual income is your total salary in a year before any deductions"
+                        stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="15px"
+                        width="15px" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.97 8.265a1.45 1.45 0 0 0-.487.57.75.75 0 0 1-1.341-.67c.2-.402.513-.826.997-1.148C10.627 6.69 11.244 6.5 12 6.5c.658 0 1.369.195 1.934.619a2.45 2.45 0 0 1 1.004 2.006c0 1.033-.513 1.72-1.027 2.215-.19.183-.399.358-.579.508l-.147.123a4.329 4.329 0 0 0-.435.409v1.37a.75.75 0 1 1-1.5 0v-1.473c0-.237.067-.504.247-.736.22-.28.486-.517.718-.714l.183-.153.001-.001c.172-.143.324-.27.47-.412.368-.355.569-.676.569-1.136a.953.953 0 0 0-.404-.806C12.766 8.118 12.384 8 12 8c-.494 0-.814.121-1.03.265ZM13 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z">
+                        </path>
+                        <path
+                            d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="input_container">
+                    <svg data-toggle="tooltip" data-placement="top" title="Please enter numbers only"
+                        class="input_error" stroke="currentColor" fill="currentColor" stroke-width="0"
+                        viewBox="0 0 24 24" height="17px" width="17px" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path
+                            d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z">
+                        </path>
+                    </svg>
+                    <input type="text input_box" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter gross annual income">
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="exampleInputPassword1">Enter Extra Income</label>
+                    <svg data-toggle="tooltip" data-placement="top"
+                        title="Extra income is your income other than salary in a year" stroke="currentColor"
+                        fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="15px" width="15px"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.97 8.265a1.45 1.45 0 0 0-.487.57.75.75 0 0 1-1.341-.67c.2-.402.513-.826.997-1.148C10.627 6.69 11.244 6.5 12 6.5c.658 0 1.369.195 1.934.619a2.45 2.45 0 0 1 1.004 2.006c0 1.033-.513 1.72-1.027 2.215-.19.183-.399.358-.579.508l-.147.123a4.329 4.329 0 0 0-.435.409v1.37a.75.75 0 1 1-1.5 0v-1.473c0-.237.067-.504.247-.736.22-.28.486-.517.718-.714l.183-.153.001-.001c.172-.143.324-.27.47-.412.368-.355.569-.676.569-1.136a.953.953 0 0 0-.404-.806C12.766 8.118 12.384 8 12 8c-.494 0-.814.121-1.03.265ZM13 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z">
+                        </path>
+                        <path
+                            d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="input_container">
+                    <svg data-toggle="tooltip" data-placement="top" title="Please enter numbers only"
+                        class="input_error" stroke="currentColor" fill="currentColor" stroke-width="0"
+                        viewBox="0 0 24 24" height="17px" width="17px" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path
+                            d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z">
+                        </path>
+                    </svg>
+                    <input type="text" class="form-control input_box" id="exampleInputPassword1"
+                        placeholder="Enter extra income from other sources">
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="exampleInputPassword1">Select Age Group</label>
+                    <svg data-toggle="tooltip" data-placement="top" title="Age group is group in which you fall"
+                        stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="15px"
+                        width="15px" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.97 8.265a1.45 1.45 0 0 0-.487.57.75.75 0 0 1-1.341-.67c.2-.402.513-.826.997-1.148C10.627 6.69 11.244 6.5 12 6.5c.658 0 1.369.195 1.934.619a2.45 2.45 0 0 1 1.004 2.006c0 1.033-.513 1.72-1.027 2.215-.19.183-.399.358-.579.508l-.147.123a4.329 4.329 0 0 0-.435.409v1.37a.75.75 0 1 1-1.5 0v-1.473c0-.237.067-.504.247-.736.22-.28.486-.517.718-.714l.183-.153.001-.001c.172-.143.324-.27.47-.412.368-.355.569-.676.569-1.136a.953.953 0 0 0-.404-.806C12.766 8.118 12.384 8 12 8c-.494 0-.814.121-1.03.265ZM13 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z">
+                        </path>
+                        <path
+                            d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z">
+                        </path>
+                    </svg>
+                </div>
+                <select class="form-control" id="exampleInputAgeGroup">
+                    <option value="0"> 0-39</option>
+                    <option value="1">40-59</option>
+                    <option value="2">60+</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div>
+                    <label for="exampleInputPassword1">Enter total applicable deductions</label>
+                    <svg data-toggle="tooltip" data-placement="top"
+                        title="Applicable deductions are your expenses that are not taxable" stroke="currentColor"
+                        fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="15px" width="15px"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.97 8.265a1.45 1.45 0 0 0-.487.57.75.75 0 0 1-1.341-.67c.2-.402.513-.826.997-1.148C10.627 6.69 11.244 6.5 12 6.5c.658 0 1.369.195 1.934.619a2.45 2.45 0 0 1 1.004 2.006c0 1.033-.513 1.72-1.027 2.215-.19.183-.399.358-.579.508l-.147.123a4.329 4.329 0 0 0-.435.409v1.37a.75.75 0 1 1-1.5 0v-1.473c0-.237.067-.504.247-.736.22-.28.486-.517.718-.714l.183-.153.001-.001c.172-.143.324-.27.47-.412.368-.355.569-.676.569-1.136a.953.953 0 0 0-.404-.806C12.766 8.118 12.384 8 12 8c-.494 0-.814.121-1.03.265ZM13 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z">
+                        </path>
+                        <path
+                            d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="input_container">
+                    <svg data-toggle="tooltip" data-placement="top" title="Please enter numbers only" class="input_error"
+                        stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="17px" width="17px"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path
+                            d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z">
+                        </path>
+                    </svg>
+                <input type="text" class="form-control input_box" id="exampleInputPassword3"
+                    placeholder="Add total applicable deduction">
+                    </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+    <div class="result_containe hide">
+        <div class="result_section">
+            <h3><strong>Your Overall Income will be</strong></h3>
+            <h3 class="your_income text-center"></h3>
+            <h5 class="mb-4">after tax deduction</h5>
+            <button type="button" class="btn btn-primary close-btn mt-4" id="closing">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        function calculateTax() {
+            // Fetch form values
+            const grossAnnualIncome = parseFloat(document.getElementById('exampleInputEmail1').value);
+            const extraIncome = parseFloat(document.getElementById('exampleInputPassword1').value);
+            const ageGroup = parseInt(document.getElementById('exampleInputAgeGroup').value);
+            const deductions = parseFloat(document.getElementById('exampleInputPassword3').value);
+            // Calculate total income after deductions
+            const totalIncome = grossAnnualIncome + extraIncome - deductions;
+            // Check if total income is less than or equal to 8 Lakhs
+            if (totalIncome <= 800000) {
+                return totalIncome; // No tax
+            } else {
+                // Calculate taxable income
+                const taxableIncome = totalIncome - 800000;
+                // Determine tax rate based on age group
+                let taxRate;
+                if (ageGroup === 0) {
+                    taxRate = 0.3; // 30% tax rate for age < 40
+                } else if (ageGroup === 1) {
+                    taxRate = 0.4; // 40% tax rate for age >= 40 but < 60
+                } else if(ageGroup === 2) {
+                    taxRate = 0.1; // 10% tax rate for age >= 60
+                }
+                // Calculate tax amount
+                const taxAmount = taxRate * taxableIncome;
+                // Calculate total income after tax deduction
+                const incomeAfterTax = totalIncome - taxAmount;
+                return incomeAfterTax;
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('taxForm').addEventListener('submit', function (event) {
+            // check fields
+            event.preventDefault(); // Prevent default form submission
+            const input_containers = document.getElementsByClassName("input_container");
+            let isFormInValid = false;
+            for (const key in input_containers) {
+                if (input_containers.hasOwnProperty.call(input_containers, key)) {
+                    const element = input_containers[key];
+                    const element_childrens = element.children;
+                    if(isNaN(parseInt(element_childrens[1].value))){
+                        element_childrens[0].classList.add('show');
+                        isFormInValid = true;
+                    }else{
+                        element_childrens[0].classList.remove('show');
+                    }
+                }
+            }
+            if(isFormInValid) return;
+            document.querySelector('.result_containe').classList.remove('hide'); // Show result container
+            const totalIncomeAfterTax = calculateTax(); // Calculate total income after tax
+            console.log(totalIncomeAfterTax)
+            document.querySelector('.your_income').textContent = totalIncomeAfterTax; // Display total income after tax
+            // document.querySelector('.result_form').classList.add('hide');
+        });
+
+        // Close result container
+        document.getElementById('closing').addEventListener('click', function () {
+            document.querySelector('.result_containe').classList.add('hide'); // Hide result container
+            console.log("closong action")
+            document.querySelector('.result_form').classList.remove('hide'); // Show form
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+</body>
+
+</html>
