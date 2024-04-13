@@ -25,4 +25,6 @@ This Tax Calculator is a simple tool designed to calculate taxes based on the pr
 
 ## Tests
 
-![Tests Passing]('./image.png')
+![Tests Passing](https://vaibhav2003chauhan.github.io/Tax-Calculator/error.png)
+
+![Tests Passing](https://vaibhav2003chauhan.github.io/Tax-Calculator/success.png)
